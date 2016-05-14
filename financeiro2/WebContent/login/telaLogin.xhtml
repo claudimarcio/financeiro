@@ -1,0 +1,43 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+<h:head>
+<h:outputStylesheet library="css" name="arquivo.css" />
+
+</h:head>
+
+<h:body styleClass="bodyLogin">
+<p:graphicImage  id="imagemTelaLogin" library="imagens" name="logo.png" width="53%" height="53%" />
+<h:form id="formLogin">
+<p:panel header="Login">
+<p:messages />
+<h:panelGrid columns="2">
+<p:outputLabel value="Nome: "/>
+<p:inputText value="#{usuarioController.usuario.nome}"/> 
+<p:outputLabel value="Senha: "/>
+<p:inputText value="#{usuarioController.usuario.senha}"/>
+<p:commandButton action="#{usuarioController.checa()}" value="login" ajax="false"/>
+
+ 
+ <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
+ </h:panelGrid>
+ </p:panel>
+ <br/>
+ <br/>
+ <p:commandLink action="#{loginControler.telaCadastro()}" 
+style="font-size:30px; color:orange; text-decoration:none;">clique aqui CADASTRAR-SE</p:commandLink>
+</h:form>
+ 
+ <h:link  id="TelaLoginLinkVoltarHome" outcome="#{loginControler.telaInicial()}" style="font-size:20px; color:black; text-decoration:none;">
+ <p:graphicImage  library="imagens" name="home.png" width="30px" height="40px"/>
+ </h:link>
+ 
+ 
+
+
+
+</h:body>	
+</html>

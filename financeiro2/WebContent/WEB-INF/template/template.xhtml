@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:mj="http://mojarra.dev.java.net/mojarra_ext"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+<h:outputStylesheet library="css" name="arquivo.css" />
+
+</h:head> 
+<h:body> 
+
+<div class="header">
+<p:graphicImage library="imagens" name="logo.png" width="350px" height="85px" />
+<p:commandLink action="#{usuarioController.logout()}" style="margin-left:950px; font-size:20px;" immediate="true">
+<p:graphicImage  library="imagens" name="sair.png" width="30px" height="50px"/>
+</p:commandLink>
+<p:outputLabel value=" Bem vindo! #{usuarioController.usuarioLogado()}" style="margin-left:50%;
+   font-size:15px; color:orange; "/>  
+
+</div>
+
+<div id="centro">
+<ui:insert name="conteudo" >
+          
+</ui:insert> 
+</div>
+
+<div id="lateral">
+
+<div id="menu">
+<h3 class="link-titulo">Cadastros</h3>  			
+    <ul class="box">					
+      <li><h:link id="toList" outcome="lista.xhtml" rendered="#{usuarioController.liberaLinkUsuario()}">
+				Usuario
+			</h:link></li>
+        <li><a href="#">Despesa</a></li>
+        <li ><a href="#">Relat&oacute;rio </a></li>
+        <li ><a href="#">Cadastro Despesa</a></li>				
+    </ul>
+
+<h3 class="link-titulo">Consulta</h3>
+    <ul class="box">					
+        <li><a href="#">Graficos</a></li>
+        <li><a href="#">Rel&aacute;torio</a></li>
+        <!-- mais links -->
+    </ul>
+
+
+
+
+    
+<!-- mais seções -->
+
+</div> <!-- /#menu -->
+
+</div> <!-- /#lateral -->
+
+
+
+</h:body> 
+</html>

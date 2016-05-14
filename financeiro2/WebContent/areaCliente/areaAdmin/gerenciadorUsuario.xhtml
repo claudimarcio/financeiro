@@ -1,0 +1,42 @@
+<ui:composition template="../../WEB-INF/template/template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:mj="http://mojarra.dev.java.net/mojarra_ext"
+      xmlns:p="http://primefaces.org/ui">
+	
+	<ui:define name="conteudo"> 
+
+<h1>Gerenciador de Usuarios</h1>
+
+<h:form id="formGerenciaUsuario">
+<p:panel header="Alterar Usuario" >
+ <h:panelGrid columns="2" columnClasses="label">
+                    <p:outputLabel for="senha" value="Senha: " />
+                    <p:inputText id="senha" value="#{usuarioController.usuario.senha}"/>
+ 
+                    <p:outputLabel for="nome" value="Nome: " />
+                     <p:inputText id="nome" value="#{usuarioController.usuario.nome}" />
+                    <p:outputLabel  for="autoridade" value="Autoridade: "/>
+                    <p:selectOneMenu id="autoridade"  value="#{usuarioController.usuario.autoridade}" style="width:150px">
+                    
+                    <f:selectItem itemValue="normal" itemLabel="normal"/>
+                    <f:selectItem  itemValue="admin" itemLabel="admin"/>
+                    </p:selectOneMenu>
+                   <p:commandButton  value="Alterar" icon="ui-icon-disk " action="#{usuarioController.AlteraUsuario()}" 
+                    update="messages" ajax="false"  style="width:100px; font-size:15px;"/>
+                 
+                  </h:panelGrid>
+</p:panel>
+
+</h:form>
+
+
+
+  </ui:define>
+  </ui:composition>               
+   
+
+
+

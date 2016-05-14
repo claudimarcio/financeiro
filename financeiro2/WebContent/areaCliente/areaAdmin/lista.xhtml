@@ -1,0 +1,51 @@
+
+
+<ui:composition template="../../WEB-INF/template/template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:mj="http://mojarra.dev.java.net/mojarra_ext"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="conteudo">
+
+		<h:form id="formListaUsuario">
+
+			<p:commandButton value=" Novo Usuario" icon="ui-icon-plusthick "
+				action="#{usuarioController.GerenciaInseirUsuario()}"
+				styleClass="ui-priority-primary" ajax="false" />
+			<br />
+			<br />
+			<p:dataTable paginator="true" rows="10" border="1"
+				value="#{usuarioController.listaTabelausuario()}" var="usuario">
+				<f:facet name="header">
+       Lista de Usuarios Cadastrados
+ </f:facet>
+				<p:column headerText="Id do Usuario">
+					<h:outputText value="#{usuario.id}}" />
+				</p:column>
+				<p:column headerText="Senha">
+					<h:outputText value="#{usuario.senha}" />
+				</p:column>
+				<p:column headerText="Nome">
+					<h:outputText value="#{usuario.nome}" />
+				</p:column>
+				<p:column headerText="Autoridade">
+					<h:outputText value="#{usuario.autoridade}" />
+				</p:column>
+				<p:column headerText="Ação">
+					<p:commandButton action="#{usuarioController.enviarDados()}"
+						value="Alterar" icon="ui-icon-arrowrefresh-1-e" ajax="false" />
+				</p:column>
+				<p:column headerText="Ação">
+					<p:commandButton action="#{usuarioController.DeletarUsuario()}"
+						value="Deletar" icon="ui-icon-close" ajax="false" />
+				</p:column>
+			</p:dataTable>
+		</h:form>
+
+	</ui:define>
+</ui:composition>
+
+
