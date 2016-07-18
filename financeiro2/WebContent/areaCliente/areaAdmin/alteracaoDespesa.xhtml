@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='ISO-8859-1' ?>
+<ui:composition template="../../WEB-INF/template/template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:mj="http://mojarra.dev.java.net/mojarra_ext"
+      xmlns:p="http://primefaces.org/ui">
+	
+	<ui:define name="conteudo"> 
+
+<h1>Gerenciador de Despesa</h1>
+
+<h:form id="formAlteraDespesa">
+<p:panel header="Alterar Despesa" >
+ <h:panelGrid columns="2" columnClasses="label">
+                    <p:outputLabel for="nome" value="Nome da Despesa: " />
+                    <p:inputText id="nome" value="#{despesasController.despesas.nome}"/>
+                    
+                    <p:outputLabel  for="tipo" value="Tipo de Despesa: "/>
+                    <p:selectOneMenu id="tipo"  value="#{despesasController.despesas.tipo}" >
+                    
+                    <f:selectItem itemValue="fixa" itemLabel="fixa"/>
+                    <f:selectItem  itemValue="variavel" itemLabel="variavel"/>
+                    </p:selectOneMenu>
+                   <p:commandButton  value="Alterar" icon="ui-icon-disk " action="#{despesasController.AlteraDespesas()}" 
+                    update="messages" ajax="false"  style="width:100px; font-size:15px;"/>
+                 
+                  </h:panelGrid>
+</p:panel>
+
+</h:form>
+
+
+
+  </ui:define>
+  </ui:composition>               

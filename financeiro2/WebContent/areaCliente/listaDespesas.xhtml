@@ -1,0 +1,42 @@
+<ui:composition template="../WEB-INF/template/template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"  lang="pt-br" 
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:mj="http://mojarra.dev.java.net/mojarra_ext"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="conteudo">
+	<h:form id="formListaDespesas" acceptcharset="ISO-8859-1">
+
+			<p:commandButton value=" Nova despesa" icon="ui-icon-plusthick "
+				action="#{despesasController.gerenciaInserirNovaDespesa()}"
+				styleClass="ui-priority-primary" ajax="false" />
+			<br />
+			<br />
+			<p:dataTable paginator="true" rows="10" border="1"
+				value="#{despesasController.listaTabelaDespesa()}" var="despesa">
+				<f:facet name="header">
+       Lista de Despesas Cadastrados
+ </f:facet>
+			
+				<p:column headerText="Tipo de Despesa">
+					<h:outputText value="#{despesa.tipo}" />
+				</p:column>
+				
+				<p:column headerText="Despesa Nome">
+					<h:outputText value="#{despesa.nome}" />
+				</p:column>
+				<p:column headerText="Ação">
+					<p:commandButton action="#{despesasController.alteracaoDespesapagina()}"
+						value="Alterar" icon="ui-icon-arrowrefresh-1-e" ajax="false" />
+				</p:column>
+				<p:column headerText="Ação">
+					<p:commandButton action="#{despesasController.DeletaDespesas()}"
+						value="Deletar" icon="ui-icon-close" ajax="false" />
+				</p:column>
+			</p:dataTable>
+		</h:form>
+
+	</ui:define>
+</ui:composition>

@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='ISO-8859-1' ?>
+<ui:composition template="../WEB-INF/template/template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"  lang="pt-br" 
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:mj="http://mojarra.dev.java.net/mojarra_ext"
+	xmlns:p="http://primefaces.org/ui">
+	<meta charset="utf-8"></meta>
+
+	<ui:define name="conteudo">
+
+		<h:form id="formCadastraNovaDespesa">
+
+			<p:panel header="Cadastrar Nova Despesa">
+				<p:message for="despesa_nome" closable="true"  />
+				<h:panelGrid columns="2">
+				    <p:outputLabel for="despesa_nome" value="Nome da Despesa: " />
+					<p:inputText id="despesa_nome" value="#{despesasController.despesas.nome}"
+						 label="Nome da Despesa" />
+
+					<p:outputLabel for="despesa_tipo" value="Tipo de Despesa: " />
+					<p:selectOneMenu id="despesa_tipo" value="#{despesasController.despesas.tipo}" style="width:150px">
+					<f:selectItem itemValue="fixa" itemLabel="fixa" />
+					<f:selectItem itemValue="variavel" itemLabel="variavel" />
+					</p:selectOneMenu>
+					
+					<p:commandButton value="Cadastrar" icon="ui-icon-disk "
+						action="#{despesasController.InserirDespesas()}" update="messages"
+						ajax="false" style="width:140px; font-size:15px;" />
+
+				</h:panelGrid>
+
+
+			</p:panel>
+		</h:form>
+
+	</ui:define>
+</ui:composition>
