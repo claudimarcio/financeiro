@@ -1,5 +1,5 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
-<html xmlns="http://www.w3.org/1999/xhtml"
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pt-br" xml:lang="pt-br"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
@@ -31,17 +31,15 @@
 <div id="lateral">
 
 <div id="menu">
+
 <h3 class="link-titulo">Cadastros</h3>  			
     <ul class="box">					
-      <li><h:link id="toList" outcome="lista.xhtml" rendered="#{usuarioController.liberaLinkUsuario()}">
-				Usuario
-			</h:link></li>
-        <li><a href="#">Despesa</a></li>
-        <li ><a href="#">Relat&oacute;rio </a></li>
-        <li ><a href="#">Cadastro Despesa</a></li>				
-    </ul>
-
-<h3 class="link-titulo">Consulta</h3>
+      <li><h:link id="listaUsuari" outcome="lista.xhtml" rendered="#{usuarioController.liberaLinkUsuario()}"> Usuario</h:link></li>
+      <li> <h:link id="despesa" rendered="true" outcome="listaDespesas.xhtml">Despesas</h:link></li>
+      <li ><a href="#">Relat&oacute;rio </a></li>
+      <li ><a href="#">Cadastro Despesa</a></li>
+     </ul>
+ <h3 class="link-titulo">Consulta</h3>
     <ul class="box">					
         <li><a href="#">Graficos</a></li>
         <li><a href="#">Rel&aacute;torio</a></li>

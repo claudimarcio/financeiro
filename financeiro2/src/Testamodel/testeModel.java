@@ -27,11 +27,11 @@ public class testeModel {
 	public static void main(String[] args) throws ParseException {
 
 		
-		List <UsuariosDAO> user = new ArrayList<UsuariosDAO>();
-		UsuariosModel un = new UsuariosModel();
-		  user=un.usuariolista();
+		List <DespesasDAO> user = new ArrayList<DespesasDAO>();
+		DespesasModel un = new DespesasModel();
+		  user=un.despesaslista("Claudimarcio","1111" );
 		  
-		  for(UsuariosDAO cd:user){
+		  for(DespesasDAO cd:user){
 			 System.out.println(cd);
 		  }
 

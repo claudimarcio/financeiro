@@ -8,6 +8,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name="despesas")
@@ -19,6 +21,8 @@ public class DespesasDAO {
 	private long id;
 	
 	@Column(name="despesas_nome", nullable=false)
+	@NotNull
+	@Size(min=1, max= 24, message = "campo nome despesa não pode ser em branco")
 	private String nome;
 	
 	@Column(name="tipo_despesa", nullable=false)

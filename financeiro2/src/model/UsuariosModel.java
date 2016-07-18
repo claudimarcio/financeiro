@@ -28,7 +28,7 @@ public class UsuariosModel {
 			System.out.println("erro na lista" + e);
 			tx.rollback();
 		}
-		 PersistenceUtil.close(em);
+		// PersistenceUtil.close(em);
 		// PersistenceUtil.close();
 		return listuser;
 	}
@@ -47,7 +47,7 @@ public class UsuariosModel {
 			System.out.println("erro");
 			tx.rollback();
 		}
-		 PersistenceUtil.close(em);
+		// PersistenceUtil.close(em);
 		// PersistenceUtil.close();
 
 		return usuario;
@@ -65,7 +65,7 @@ public class UsuariosModel {
 			System.out.println("Erro ao inserir usuario" + e);
 			tx.rollback();
 		}
-		 PersistenceUtil.close(em);
+		// PersistenceUtil.close(em);
 		// PersistenceUtil.close();
 	}
 
@@ -83,7 +83,7 @@ public class UsuariosModel {
 			System.out.println("Erro ao eliminar usuario" + e);
 			tx.rollback();
 		}
-		 PersistenceUtil.close(em);
+		// PersistenceUtil.close(em);
 		// PersistenceUtil.close();
 	}
 
@@ -100,7 +100,7 @@ public class UsuariosModel {
 			System.out.println("Erro ao alterar usuario" + e);
 			tx.rollback();
 		}
-		 PersistenceUtil.close(em);
+		// PersistenceUtil.close(em);
 		// PersistenceUtil.close();
 	}
 
@@ -132,6 +132,8 @@ public class UsuariosModel {
 					usuario.setAutoridade(emp.getAutoridade());
 					usuario.setNome(emp.getNome());
 					usuario.setSenha(emp.getSenha());
+					usuario.setId(emp.getId());
+					
 
 				}
 			}

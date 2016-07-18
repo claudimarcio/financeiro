@@ -11,14 +11,13 @@
 		<h:form id="formCadastraNovoUsuario">
 
 			<p:panel header="Cadastrar Novo Usuario">
-				<p:messages />
-				<h:panelGrid columns="2">
+					<h:panelGrid columns="2">
 					<p:outputLabel for="senha" value="Senha: " />
 					<p:inputText id="senha" value="#{usuarioController.usuario.senha}"
-						required="true" label="senha" />
+						 label="senha" />
 
 					<p:outputLabel for="nome" value="Nome: " />
-					<p:inputText id="nome" value="#{usuarioController.usuario.nome}" />
+					<p:inputText id="nome" value="#{usuarioController.usuario.nome}" />  
 					<p:outputLabel for="autoridade" value="Autoridade" />
 					<p:selectOneMenu id="autoridade"
 						value="#{usuarioController.usuario.autoridade}"
@@ -30,9 +29,12 @@
 					<p:commandButton value="Cadastrar" icon="ui-icon-disk "
 						action="#{usuarioController.InserirUsuario()}" update="messages"
 						ajax="false" style="width:140px; font-size:15px;" />
-
+                    
 				</h:panelGrid>
-
+				<h:message for="nome" style="color:red" />
+				<br/>
+				<h:message for="senha" style="color:red"/>
+              
 
 			</p:panel>
 		</h:form>

@@ -6,6 +6,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.hibernate.annotations.NotFound;
+import org.hibernate.validator.constraints.NotBlank;
 
 
 
@@ -20,9 +25,12 @@ public class UsuariosDAO {
 	private long id;
 	
 	@Column(name = "usuario_nome", nullable = false)
+	@NotBlank(message="Campo nome não pode ser em branco")
 	private String nome;
 	
 	@Column(name="usuario_senha", nullable=false)
+	@NotNull
+	@Size(min=1, max= 24, message = "campo Senha não pode ser em branco")
 	private String senha;
 	
 	@Column(name="usuario_autoridade", nullable=false)
@@ -49,7 +57,7 @@ public class UsuariosDAO {
 	public void setId(long id) {
 		this.id = id;
 	}
-
+	
 	public String getNome() {
 		return nome;
 	}

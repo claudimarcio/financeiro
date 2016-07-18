@@ -20,5 +20,6 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/servletFilter"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/bean-validator.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

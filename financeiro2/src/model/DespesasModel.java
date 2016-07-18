@@ -29,8 +29,8 @@ public class DespesasModel {
 				System.out.println("Erro ao inserir despesas" + e);
 				tx.rollback();
 			}
-		PersistenceUtil.close(em);
-        PersistenceUtil.close();
+		//PersistenceUtil.close(em);
+        //PersistenceUtil.close();
 	}
 	
 public void RemoveDespesas(DespesasDAO despesa){
@@ -41,14 +41,15 @@ public void RemoveDespesas(DespesasDAO despesa){
 		
 		try{
 			tx.begin();
-	    	despesa.setStatus(false);
-	        tx.commit(); 
+			DespesasDAO despesa1 = em.find(DespesasDAO.class, despesa.getId());
+			em.remove(despesa1);
+			tx.commit();
 			} catch(Exception e){
 				System.out.println("Erro ao eliminar despesas" + e);
 				tx.rollback();
 			}
-		PersistenceUtil.close(em);
-        PersistenceUtil.close();
+		//PersistenceUtil.close(em);
+        //PersistenceUtil.close();
 	}
 
 public void AlteraDespesas(DespesasDAO despesas){
@@ -63,18 +64,18 @@ public void AlteraDespesas(DespesasDAO despesas){
 			System.out.println("Erro ao laterar despesas" + e);
 			tx.rollback();
 		}
-	PersistenceUtil.close(em);
-    PersistenceUtil.close();
+	//PersistenceUtil.close(em);
+    //PersistenceUtil.close();
 }
 
 
-public  List<DespesasDAO> despesaslista(){
+public  List<DespesasDAO> despesaslista(String usuario, String senha){
 	List<DespesasDAO>listdesp = null;
 	EntityManager em = PersistenceUtil.getEntityManager();
 	EntityTransaction tx = em.getTransaction();
 	try{
 	tx.begin();
-	listdesp = em.createQuery("from DespesasDAO", DespesasDAO.class).getResultList();
+	listdesp = em.createQuery("from DespesasDAO where usuario.nome =  '"+ usuario +"' and usuario.senha = '"+ senha +"' and status = true" , DespesasDAO.class).getResultList();
     tx.commit(); 
 	}catch(Exception e){
 		System.out.println("erro na lista"+e);

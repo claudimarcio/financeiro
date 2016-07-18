@@ -24,7 +24,7 @@ public class UsuarioController {
 
 	private DataModel<UsuariosDAO> usuariolista;
 	private UsuariosDAO usuarioDao;
-    private boolean liberaLinkUsuario = false;
+	private boolean liberaLinkUsuario = false;
 	UsuariosModel usuarioM = new UsuariosModel();
 
 	public DataModel<UsuariosDAO> listaTabelausuario() {
@@ -99,7 +99,8 @@ public class UsuarioController {
 
 	public String checa() {
 		String url = null;
-
+		
+		
 		UsuariosDAO user = (UsuariosDAO) usuarioM.getUsuario(
 				usuarioDao.getNome(), usuarioDao.getSenha());
 
@@ -107,9 +108,11 @@ public class UsuarioController {
 			System.out.println("reprovado");
 			url = telaLogin();
 			FacesContext.getCurrentInstance().addMessage(
-					null,
-					new FacesMessage(FacesMessage.SEVERITY_INFO, "erro",
+					"formLogin",
+					new FacesMessage(FacesMessage.SEVERITY_INFO, "",
 							"Senha ou Usuario errado"));
+
+			
 		} else {
 			try {
 
@@ -117,21 +120,25 @@ public class UsuarioController {
 				HttpSession session = (HttpSession) facesContext
 						.getExternalContext().getSession(false);
 				session.setAttribute("usuario", user);
+				
 
 				// define qual diretorio de acordo com privilégios
 				if (user.getAutoridade().equals("admin")) {
 					url = "../areaCliente/areaAdmin/lista.xhtml";
+					session.setMaxInactiveInterval(3);// invalida a sessão apos 2 min
 					
 					liberaLinkUsuario = true;
 
 				} else {
 					url = "../areaCliente/areaCliente.xhtml";
+					session.setMaxInactiveInterval(3);// invalida a sessão apos 2 min
+					
 					liberaLinkUsuario = false;
 				}
 
 			} catch (Exception e) {
 				System.out.println("erro");
-			}
+			} 
 
 		}
 
@@ -155,8 +162,7 @@ public class UsuarioController {
 			url = "../index.xhtml";
 		}
 		session.invalidate();
-        
-    
+
 		return url;
 
 	}
@@ -180,13 +186,14 @@ public class UsuarioController {
 
 		return usuario.getNome();
 	}
-	
-	
-	public boolean liberaLinkUsuario(){
-		
-		
+
+	public boolean liberaLinkUsuario() {
+
 		return liberaLinkUsuario;
-		
+
 	}
+
+	
+	
 
 }

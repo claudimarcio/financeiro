@@ -40,15 +40,17 @@ public class Autentication implements Filter {
 		
 		HttpServletResponse res = (HttpServletResponse) response;
 		HttpServletRequest req = (HttpServletRequest) request;
-		HttpSession session = (HttpSession) ((HttpServletRequest) request).getSession(false);
+		HttpSession session = (HttpSession) ((HttpServletRequest) request).getSession(true);
 		
 		
 		if(session.getAttribute("usuario")==null){
 			res.sendRedirect(req.getContextPath()+"/index.xhtml");
 			
+			
 		}else{
 		
 		chain.doFilter(request, response);
+		
 		}					
 		
 	}
