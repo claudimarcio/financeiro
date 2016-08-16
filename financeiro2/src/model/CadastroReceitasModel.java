@@ -1,8 +1,11 @@
 package model;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
+import DAO.CadastroDespesasDAO;
 import DAO.CadastroReceitasDAO;
 import conexao.PersistenceUtil;
 
@@ -26,8 +29,8 @@ public class CadastroReceitasModel {
 				System.out.println("Erro ao inserir cadastro de receita" + e);
 				tx.rollback();
 			}
-		PersistenceUtil.close(em);
-        PersistenceUtil.close();
+		//PersistenceUtil.close(em);
+        //PersistenceUtil.close();
 	}
 	
 public void RemoveCadastroReceitas(long id){
@@ -38,14 +41,15 @@ public void RemoveCadastroReceitas(long id){
 		
 		try{
 			tx.begin();
-	    	cr.setStatus(false);
+			em.remove(cr);
+	    	//cr.setStatus(false);
 	        tx.commit(); 
 			} catch(Exception e){
 				System.out.println("Erro ao eliminar cadastro de receita" + e);
 				tx.rollback();
 			}
-		PersistenceUtil.close(em);
-        PersistenceUtil.close();
+		//PersistenceUtil.close(em);
+        //PersistenceUtil.close();
 	}
 	
 public void AlteraCadastroReceitas(CadastroReceitasDAO cadastro_receitas){
@@ -60,8 +64,34 @@ public void AlteraCadastroReceitas(CadastroReceitasDAO cadastro_receitas){
 			System.out.println("Erro ao alterar cadastro de receita" + e);
 			tx.rollback();
 		}
-	PersistenceUtil.close(em);
-    PersistenceUtil.close();
+	//PersistenceUtil.close(em);
+    //PersistenceUtil.close();
 }
+
+
+public List<CadastroReceitasDAO> cadastroReceitaList(long usuarioid,
+		int cadastroGastoStatus) {
+	List<CadastroReceitasDAO> listcadastroRec = null;
+	EntityManager em = PersistenceUtil.getEntityManager();
+	EntityTransaction tx = em.getTransaction();
+	try {
+		tx.begin();
+		listcadastroRec = em.createQuery(
+				" from  CadastroReceitasDAO cd"
+		+ " where cd.usuario='"+usuarioid +"' and cd.status='"+cadastroGastoStatus+"'",
+				CadastroReceitasDAO.class).getResultList();
+		tx.commit();
+	} catch (Exception e) {
+		System.out.println("erro na lista" + e);
+		tx.rollback();
+	}
+	System.out.println("retornando lista: "+ listcadastroRec);
+	
+	// PersistenceUtil.close(em);
+	// PersistenceUtil.close();
+	return listcadastroRec;
+}
+
+
 
 }

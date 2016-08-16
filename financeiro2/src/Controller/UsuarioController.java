@@ -125,13 +125,13 @@ public class UsuarioController {
 				// define qual diretorio de acordo com privilégios
 				if (user.getAutoridade().equals("admin")) {
 					url = "../areaCliente/areaAdmin/lista.xhtml";
-					session.setMaxInactiveInterval(3);// invalida a sessão apos 2 min
+					//session.setMaxInactiveInterval(3);// invalida a sessão apos 2 min
 					
 					liberaLinkUsuario = true;
 
 				} else {
 					url = "../areaCliente/areaCliente.xhtml";
-					session.setMaxInactiveInterval(3);// invalida a sessão apos 2 min
+					//session.setMaxInactiveInterval(3);// invalida a sessão apos 2 min
 					
 					liberaLinkUsuario = false;
 				}

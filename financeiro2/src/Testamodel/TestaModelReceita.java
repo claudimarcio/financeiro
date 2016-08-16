@@ -20,12 +20,13 @@ public class TestaModelReceita {
 		 
 		 ReceitasDAO re = em.find(ReceitasDAO.class,1l);
 		 re.setStatus(true);
-		 
+		 re.setTipo("quinzenal");
 		 ReceitasModel reM = new ReceitasModel();
+		 System.out.println("Inserido com sucesso: ");
 		 
 		 try{
 			 
-			 reM.AlteraReceitas(re);
+			 reM.AlteraRec(re);
 			 
 		 }catch(Exception e){
 			 

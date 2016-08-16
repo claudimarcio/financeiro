@@ -137,7 +137,7 @@ public class UsuariosModel {
 
 				}
 			}
-			PersistenceUtil.close(em);
+			//PersistenceUtil.close(em);
 			return usuario;
 
 		} catch (Exception e) {

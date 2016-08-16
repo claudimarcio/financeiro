@@ -1,5 +1,8 @@
 package DAO;
 
+import java.io.Serializable;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,12 +11,19 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 
 
 @Entity
 @Table(name="receitas")
-public class ReceitasDAO {
+public class ReceitasDAO implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -21,6 +31,8 @@ public class ReceitasDAO {
 	private long id;
 	
 	@Column(name="receitas_nome", nullable=false)
+	@NotNull
+	@Size(min=2, max=15, message="Campo não pode ser em branco")
 	private String nome;
 	
 	@Column(name="tipo_receita", nullable=false)

@@ -85,4 +85,13 @@ public  List<DespesasDAO> despesaslista(String usuario, String senha){
    // PersistenceUtil.close();
     return listdesp;
 }
+
+public String impremestring(String string){
+	
+	System.out.println("string");
+	
+	return "";
+	
+}
+
 }

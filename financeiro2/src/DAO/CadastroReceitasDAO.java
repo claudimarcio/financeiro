@@ -12,6 +12,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.Valid;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 
 
 
@@ -26,10 +29,13 @@ public class CadastroReceitasDAO {
 	private long id;
 	
 	@Column(name="cadastro_receitas_valor", nullable=false)
+	@NotNull(message="valor não pode ser zero")
+	@Min(value=1)
 	private double valor;
 	
 	@Temporal(value=TemporalType.DATE)
 	@Column(name="cadastro_receitas_data", nullable=false)
+	@NotNull(message="Campo data não pode ser em branco")
 	private Date data;
 	
 	@Column(name="Cadastro_receitas_status", nullable=false)
@@ -41,6 +47,8 @@ public class CadastroReceitasDAO {
 	
 	@ManyToOne
 	@JoinColumn(name="receitas_id", referencedColumnName="receitas_id", nullable=false)
+	@Valid
+	@NotNull(message="selecione uma receita!")
 	private ReceitasDAO receitas;
 
 	

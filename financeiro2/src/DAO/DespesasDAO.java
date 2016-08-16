@@ -1,5 +1,7 @@
 package DAO;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,10 +13,20 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import converterDoOnselectMenu.BaseEntity;
+
+
 @Entity
 @Table(name="despesas")
-public class DespesasDAO {
+public class DespesasDAO implements Serializable{
 	
+	
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="despesas_id")
@@ -26,6 +38,7 @@ public class DespesasDAO {
 	private String nome;
 	
 	@Column(name="tipo_despesa", nullable=false)
+	@NotNull(message="Selecione o tipo da despesa?")
 	private String tipo;
 	
 	@Column(name="despesas_status", nullable=false)
@@ -53,12 +66,12 @@ public class DespesasDAO {
 		
 	}
 
-
+  //alterado o getid()
 	public long getId() {
 		return id;
 	}
-
-
+		  
+	
 	public void setId(long id) {
 		this.id = id;
 	}
@@ -131,6 +144,12 @@ public class DespesasDAO {
 		return "Despesas [id=" + id + ", nome=" + nome + ", tipo=" + tipo
 				+ ", staus=" + status +", usuario=" + usuario + "]";
 	}
+
+
+	
+
+
+	
 
 
 

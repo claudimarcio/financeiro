@@ -13,12 +13,14 @@
 
 <h:form id="formAlteraDespesa">
 <p:panel header="Alterar Despesa" >
+<p:message for="despesa_nome" closable="true" />
+<p:message for="despesa_tipo" closable="true" />
  <h:panelGrid columns="2" columnClasses="label">
-                    <p:outputLabel for="nome" value="Nome da Despesa: " />
-                    <p:inputText id="nome" value="#{despesasController.despesas.nome}"/>
+                    <p:outputLabel for="despesa_nome" value="Nome da Despesa: " />
+                    <p:inputText id="despesa_nome" value="#{despesasController.despesas.nome}"/>
                     
-                    <p:outputLabel  for="tipo" value="Tipo de Despesa: "/>
-                    <p:selectOneMenu id="tipo"  value="#{despesasController.despesas.tipo}" >
+                    <p:outputLabel  for="despesa_tipo" value="Tipo de Despesa: "/>
+                    <p:selectOneMenu id="despesa_tipo"  value="#{despesasController.despesas.tipo}" >
                     
                     <f:selectItem itemValue="fixa" itemLabel="fixa"/>
                     <f:selectItem  itemValue="variavel" itemLabel="variavel"/>

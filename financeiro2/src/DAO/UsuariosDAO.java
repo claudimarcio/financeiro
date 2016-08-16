@@ -1,5 +1,7 @@
 package DAO;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,16 +11,21 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import org.hibernate.annotations.NotFound;
 import org.hibernate.validator.constraints.NotBlank;
+
+
 
 
 
 @Entity
 @Table(name = "usuario")
-public class UsuariosDAO {
+public class UsuariosDAO implements Serializable{
 	
-	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue (strategy = GenerationType.IDENTITY)
 	@Column(name = "usuario_id")
@@ -49,11 +56,14 @@ public class UsuariosDAO {
 		super();
 		
 	}
+	
 
 	public long getId() {
 		return id;
 	}
 
+  
+	
 	public void setId(long id) {
 		this.id = id;
 	}
@@ -109,6 +119,8 @@ public class UsuariosDAO {
 		return true;
 	}
 
+
+	
 
 	
 

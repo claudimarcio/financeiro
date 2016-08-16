@@ -120,5 +120,32 @@ public class DespesasController {
 		 
 		 return "alteracaoDespesa.xhtml";
 	 }
+	 
+	 
+	 /*
+	  *Este metodo retorna o nome das despesas cadastradas para serem utilizado
+	  * para preencher o list da pagina novoCadastroDespesa.xhtml 
+	  */
+	 
+	 
+	 public List<DespesasDAO> listaNormal(){
+		 
+		 FacesContext facesContext = FacesContext.getCurrentInstance();
+			HttpSession session = (HttpSession) facesContext.getExternalContext()
+					.getSession(false);
+
+			UsuariosDAO usuario = (UsuariosDAO) session.getAttribute("usuario");
+			String usuarioNome = usuario.getNome();
+			String usuarioSenha = usuario.getSenha();
+
+		
+			
+			List<DespesasDAO> lista = despesasM.despesaslista(usuarioNome,
+					usuarioSenha);
+			
+			return lista; 
+		 
+		 
+	 }
 
 }
