@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='ISO-8859-1' ?>
+<ui:composition template="../../WEB-INF/template/template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"  lang="pt-br" 
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:mj="http://mojarra.dev.java.net/mojarra_ext"
+	xmlns:p="http://primefaces.org/ui">
+	<meta charset="utf-8"></meta>
+
+	<ui:define name="conteudo">
+
+		<h:form id="formCadastraNovaDespesa">
+
+			<p:panel header="Cadastrar Nova Receita">
+			
+				<p:message for="receita_nome" closable="true" />
+				<p:message for="receita_tipo" closable="true" />
+				<h:panelGrid columns="2">
+				    <p:outputLabel for="receita_nome" value="Nome da Receita: " />
+					<p:inputText id="receita_nome" value="#{receitasController.receitas.nome}"
+						 label="Nome da Despesa" />
+
+					<p:outputLabel for="receita_tipo" value="Tipo de Receita: " />
+					<p:selectOneMenu id="receita_tipo" value="#{receitasController.receitas.tipo}" style="width:150px">
+					<f:selectItem  itemValue="" itemLabel="Selecione"/>
+					<f:selectItem itemValue="Mensal" itemLabel="Mensal" />
+					<f:selectItem itemValue="quinzenal" itemLabel="Quinzenal" />
+					</p:selectOneMenu>
+					
+					<p:commandButton value="Cadastrar" icon="ui-icon-disk "
+						action="#{receitasController.InserirRececeitas()}" update="messages"
+						ajax="false" style="width:140px; font-size:15px;" />
+
+				</h:panelGrid>
+
+
+			</p:panel>
+		</h:form>
+
+	</ui:define>
+</ui:composition>

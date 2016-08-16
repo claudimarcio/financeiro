@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='ISO-8859-1' ?>
+<ui:composition template="../../WEB-INF/template/template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:mj="http://mojarra.dev.java.net/mojarra_ext"
+      xmlns:p="http://primefaces.org/ui">
+	
+	<ui:define name="conteudo"> 
+
+<h1>Altera Receita</h1>
+
+<h:form id="formAlteraDespesa">
+<p:panel header="Alterar Receita" >
+<p:message for="receita_nome" closable="true" />
+<p:message for="receita_tipo" closable="true" />
+ <h:panelGrid columns="2" columnClasses="label">
+                    <p:outputLabel for="receita_nome" value="Nome da Receita: " />
+                    <p:inputText id="receita_nome" value="#{receitasController.receitas.nome}"/>
+                    
+                    <p:outputLabel  for="receita_tipo" value="Tipo de Receita: "/>
+                    <p:selectOneMenu id="receita_tipo"  value="#{receitasController.receitas.tipo}" >
+                    
+                    <f:selectItem itemValue="mensal" itemLabel="mensal"/>
+                    <f:selectItem  itemValue="quinzenal" itemLabel="quinzenal"/>
+                    </p:selectOneMenu>
+                   <p:commandButton  value="Alterar" icon="ui-icon-disk " action="#{receitasController.AlteraRec()}" 
+                    update="messages" ajax="false"  style="width:100px; font-size:15px;"/>
+                 
+                  </h:panelGrid>
+</p:panel>
+
+</h:form>
+
+
+
+  </ui:define>
+  </ui:composition> 

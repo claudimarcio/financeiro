@@ -1,0 +1,57 @@
+<?xml version='1.0' encoding='ISO-8859-1' ?>
+<ui:composition template="../../WEB-INF/template/template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:mj="http://mojarra.dev.java.net/mojarra_ext"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="conteudo">
+
+		<h1>Gerenciador de Cadastro Despesa</h1>
+
+		<h:form id="formAlteraDespesa">
+			<p:panel header="Alterar Cadastro de Despesa">
+			    <p:message for="data" closable="true" />
+			    <p:message for="valor" closable="true" />
+			
+				<h:panelGrid columns="2" columnClasses="label">
+					<p:outputLabel for="nome" value="Despesa Nome: " />
+					<p:inputText id="nome" disabled="true"
+						value="#{cadastroDespesaControle.cadastroDespeDAO.despesas.nome}" />
+						
+					<p:outputLabel for="valor" value="Valor da Despesa: " />
+					<p:inputText id="valor"
+						value="#{cadastroDespesaControle.cadastroDespeDAO.valor}">
+						<f:convertNumber minFractionDigits="2" />
+						</p:inputText>
+						
+					<p:outputLabel for="data" value="Selecione a data: "/>	
+					<p:calendar id="data"
+						value="#{cadastroDespesaControle.cadastroDespeDAO.data}"
+						locale="pt_BR" 
+						navigator="true" 
+						pattern="dd/MM/yyyy"
+						showOn="button" />
+
+					<p:outputLabel for="tipo" value="Tipo: " />
+					<p:selectOneMenu id="tipo"
+						value="#{cadastroDespesaControle.cadastroDespeDAO.despesas.tipo}">
+                        <f:selectItem itemValue="fixa" itemLabel="fixa" />
+						<f:selectItem itemValue="variavel" itemLabel="variavel" />
+					</p:selectOneMenu>
+					
+					<p:commandButton value="Alterar" icon="ui-icon-disk "
+						action="#{cadastroDespesaControle.alteraCadastroDespesa()}" update="messages"
+						ajax="false" style="width:100px; font-size:15px;" />
+
+				</h:panelGrid>
+			</p:panel>
+
+		</h:form>
+
+
+
+	</ui:define>
+</ui:composition>

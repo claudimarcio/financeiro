@@ -1,0 +1,64 @@
+<ui:composition template="../../WEB-INF/template/template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:mj="http://mojarra.dev.java.net/mojarra_ext"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="conteudo">
+	<h:form id="formListaDespesas">
+
+			<p:commandButton value=" Novo Cadastro Receita" icon="ui-icon-plusthick "
+				action="#{cadastroReceitaController.gerenciaInserirCadastroReceita()}"
+				styleClass="ui-priority-primary" ajax="false" />
+			<br />
+			<br />
+			<p:dataTable paginator="true" rows="10" border="1"
+				value="#{cadastroReceitaController.listaTabelaCastroRec()}" var="cadastroReceita">
+				<f:facet name="header">
+       Lista dos Gastos Cadastrados
+ </f:facet>
+				
+				<p:column headerText="Tipo de Receita">
+					<h:outputText value="#{cadastroReceita.receitas.tipo}" />
+				</p:column>
+				
+				<p:column headerText="Receita Nome">
+					<h:outputText value="#{cadastroReceita.receitas.nome}" />
+				</p:column>
+				
+				<p:column headerText="Receita Valor">
+					<h:outputText value="#{cadastroReceita.valor}" >
+					<f:convertNumber minFractionDigits="2" />
+					</h:outputText>
+					
+					
+				</p:column>
+				
+				<p:column headerText="Data da Receita">
+				   
+					<h:outputText value="#{cadastroReceita.data}" >
+					 <f:convertDateTime pattern="dd-MM-yyyy" />
+					
+					</h:outputText> 
+					
+					 
+				</p:column>
+				
+				
+				
+				
+				<p:column headerText="Ação">
+					<p:commandButton action="#{cadastroReceitaController.alteracaoCadastroReceitaPagina()}"
+						value="Alterar" icon="ui-icon-arrowrefresh-1-e" ajax="false" />
+				</p:column>
+				<p:column headerText="Ação">
+					<p:commandButton action="#{cadastroReceitaController.remover()}"
+						value="Deletar" icon="ui-icon-close" ajax="false" />
+				</p:column>
+			</p:dataTable>
+		</h:form>
+
+	</ui:define>
+</ui:composition>

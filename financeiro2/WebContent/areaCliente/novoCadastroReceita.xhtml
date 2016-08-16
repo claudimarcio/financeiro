@@ -1,0 +1,52 @@
+<?xml version='1.0' encoding='ISO-8859-1' ?>
+<ui:composition template="../WEB-INF/template/template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:mj="http://mojarra.dev.java.net/mojarra_ext"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="conteudo">
+
+		<h:form id="formCadastraNovaDespesa">
+
+			<p:panel header="Cadastrar Cadastro de Receita">
+				<p:message for="receita_Cadastrada" closable="true" />
+				<p:message for="data" closable="true" />
+			    <p:message for="valor" closable="true" />
+				<h:panelGrid columns="2">
+
+					<p:outputLabel for="receita_Cadastrada" value="Nova Receita: " />
+					<p:selectOneMenu  id="receita_Cadastrada" converter="conversorReceita" 
+					value="#{cadastroReceitaController.cadastroRecDAO.receitas}" 
+						style="width:150px">
+						<f:selectItem  itemValue="" itemLabel="selecione"/>
+						<f:selectItems   value="#{cadastroReceitaController.listaNormal()}" var= "cadastra" 
+						itemLabel="#{cadastra.nome}" itemValue="#{cadastra}"/>
+						
+					</p:selectOneMenu>
+
+					<p:outputLabel for="data" value="data" />
+					<p:calendar id="data"
+						value="#{cadastroReceitaController.cadastroRecDAO.data}"
+						showOn="button" />
+					<p:outputLabel for="valor" value="Valor da Receita: " />
+					<p:inputText id="valor"
+						value="#{cadastroReceitaController.cadastroRecDAO.valor}"
+						label="Valor da  receita: " >
+						<f:convertNumber minFractionDigits="2" />
+						</p:inputText>
+						
+					<p:commandButton value="Cadastrar" icon="ui-icon-disk "
+						action="#{cadastroReceitaController.InserirCadastroReceita()}" update="messages"
+						ajax="false" style="width:140px; font-size:15px;" />
+
+				</h:panelGrid>
+
+
+			</p:panel>
+		</h:form>
+
+	</ui:define>
+</ui:composition>
