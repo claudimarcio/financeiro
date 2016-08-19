@@ -2,7 +2,6 @@ package model;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -190,6 +189,40 @@ public class GerenciaContas {
 		
 		
 		return saldoAtual;
+	}
+	
+	
+	
+	public Double valorDespesaTotalDescontaPago(long usuarioId) {
+
+		EntityManager em = PersistenceUtil.getEntityManager();
+		EntityTransaction tx = em.getTransaction();
+
+		CadastroDespesasDAO valor = null;
+		Double valor1 = null;
+		try {
+			tx.begin();
+			// Query query =
+			// em.createQuery(" from CadastroDespesasDAO cd join fetch cd.despesas  join fetch cd.usuario",
+			// CadastroDespesasDAO.class);
+
+			TypedQuery<Double> query = em
+					.createQuery(
+							" SELECT SUM(cd.valor)FROM CadastroDespesasDAO cd "
+									+ "WHERE YEAR(cd.data) = YEAR(CURRENT_DATE) AND MONTH(cd.data) = MONTH(CURRENT_DATE) AND cd.usuario='"
+									+ usuarioId + "' and cd.status=false", Double.class);
+			valor1 = query.getSingleResult();
+			tx.commit();
+		} catch (Exception e) {
+			System.out.println("erro ao gerar a lista: " + e);
+		}
+		// PersistenceUtil.close(em);
+		// PersistenceUtil.close();
+		
+		saldoDespesa = valor1;
+
+		return valor1;
+
 	}
 	
 }

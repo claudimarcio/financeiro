@@ -6,7 +6,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
 import DAO.ProjecaoGastosDAO;
-import DAO.UsuariosDAO;
 import conexao.PersistenceUtil;
 
 public class ProjecaoGastosModel {

@@ -5,9 +5,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
-import DAO.DespesasDAO;
 import DAO.ReceitasDAO;
-import DAO.UsuariosDAO;
 import conexao.PersistenceUtil;
 
 public class ReceitasModel {

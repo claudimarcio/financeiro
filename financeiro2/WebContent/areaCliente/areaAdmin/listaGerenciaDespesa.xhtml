@@ -11,7 +11,8 @@
 
 			<p:tabView>
 				<p:tab title="Contas a pagar">
-					<p:dataTable paginator="true" rows="10" border="1"  style="text-align:center"
+					<p:dataTable paginator="true" rows="10" border="1"
+						style="text-align:center" id="tabelaGastos"
 						value="#{gerenciaDespesaController.listaDespesaPorData()}"
 						var="gerenciaDespesa">
 						<f:facet name="header">
@@ -40,24 +41,36 @@
 							</h:outputText>
 						</p:column>
 
+						<p:column headerText="BAIXA">
+
+						<p:commandButton actionListener="#{gerenciaDespesaController.DeixarComoPagoCadastroDespesa()}"
+						  value="Dar Baixa" icon="ui-icon-check"  ajax="true" disabled="#{gerenciaDespesa.status}" update="tabelaGastos"   />
+						</p:column>
+
 						<p:columnGroup type="footer">
 							<p:row>
 								<p:column colspan="3" style="text-align:right"
 									footerText="Total:" />
-								<p:column footerText="#{gerenciaDespesaController.valorTotalDespesa()}" style=" color: red" >
-								</p:column>														
+								<p:column
+									footerText="#{gerenciaDespesaController.valorTotalDespesa()}"
+									style=" color: red">
+								</p:column>
+								<p:column
+									footerText="#{gerenciaDespesaController.valorTotalDespesaDescontaPago()}"></p:column>
 							</p:row>
 						</p:columnGroup>
+						
+						
+
 					</p:dataTable>
-					
-					
-																			
+
 				</p:tab>
 
 				<p:tab title="Receitas">
-				
-				
-				<p:dataTable paginator="true" rows="10" border="1"  style="text-align:center"
+
+
+					<p:dataTable paginator="true" rows="10" border="1"
+						style="text-align:center"
 						value="#{gerenciaDespesaController.listaReceitaPorData()}"
 						var="gerenciaReceita">
 						<f:facet name="header">
@@ -85,7 +98,8 @@
 
 
 						<p:column headerText="Receita Valor">
-							<h:outputText value="#{gerenciaReceita.valor}" style="color: blue">
+							<h:outputText value="#{gerenciaReceita.valor}"
+								style="color: blue">
 								<f:convertNumber minFractionDigits="2" />
 							</h:outputText>
 						</p:column>
@@ -94,55 +108,61 @@
 							<p:row>
 								<p:column colspan="3" style="text-align:right"
 									footerText="Total:" />
-								<p:column footerText="#{gerenciaDespesaController.valorTotalReceitas()}" style=" color: blue" >
+								<p:column
+									footerText="#{gerenciaDespesaController.valorTotalReceitas()}"
+									style=" color: blue">
 								</p:column>
-								
 
-								
+
+
 							</p:row>
 						</p:columnGroup>
-
 					</p:dataTable>
-					
 				</p:tab>
 			</p:tabView>
-				
-			<br/>
-			<br/>
-			<br/>
-					
-			       <p:panel header="Saldo total Receita" style="width:300px">
-					<h:panelGrid columns="2">
+
+			<br />
+			<br />
+			<br />
+
+			<p:panel header="Saldo total Receita" style="width:300px">
+				<h:panelGrid columns="2">
 					<p:outputLabel value="	" />
-					<h:outputText value="#{gerenciaDespesaController.valorTotalReceitas()}" style="color:blue"  />
-					</h:panelGrid>
-					</p:panel>
-					
-					<p:panel header="Saldo total Despesa" style="width:300px">
-					<h:panelGrid columns="2">
+					<h:outputText
+						value="#{gerenciaDespesaController.valorTotalReceitas()}"
+						style="color:blue" />
+				</h:panelGrid>
+			</p:panel>
+
+			<p:panel header="Saldo total Despesa" style="width:300px">
+				<h:panelGrid columns="2">
 					<p:outputLabel value="" />
-					<h:outputText value="#{gerenciaDespesaController.valorTotalDespesa()}" style="color:red" />
-					</h:panelGrid>
-					</p:panel>
-					
-					<p:panel header="SALDO ATUAL" style="width:300px">
-					<h:panelGrid columns="2">
+					<h:outputText
+						value="#{gerenciaDespesaController.valorTotalDespesa()}"
+						style="color:red" />
+				</h:panelGrid>
+			</p:panel>
+
+			<p:panel header="SALDO ATUAL" style="width:300px">
+				<h:panelGrid columns="2">
 					<p:outputLabel value="	" />
-					<h:outputText value="#{gerenciaDespesaController.saldoAtual()}"/>
-					</h:panelGrid>
-				   </p:panel>
-		 
-		  
-		  
-		  
-				
-	</h:form>
-	<br/>
-	<br/>
-	<br/>
-	<br/>
-	<br/>
-	<br/>
+					<h:outputText value="#{gerenciaDespesaController.saldoAtual()}" />
+				</h:panelGrid>
+			</p:panel>
+
+		</h:form>
+       <form >
+       
+          
+       </form>
+
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
 
 	</ui:define>
+
 </ui:composition>

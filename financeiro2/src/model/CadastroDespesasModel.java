@@ -1,18 +1,11 @@
 package model;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
-import javax.faces.context.FacesContext;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
-import javax.persistence.Query;
-import javax.servlet.http.HttpSession;
 
 import DAO.CadastroDespesasDAO;
-import DAO.DespesasDAO;
 import conexao.PersistenceUtil;
 
 public class CadastroDespesasModel {
@@ -84,7 +77,7 @@ public class CadastroDespesasModel {
 			tx.begin();
 			listcadastroDesp = em.createQuery(
 					" from  CadastroDespesasDAO cd"
-			+ " where cd.usuario='"+usuarioid +"' and cd.status='"+cadastroGastoStatus+"'",
+			+ " where cd.usuario='"+usuarioid +"'",
 					CadastroDespesasDAO.class).getResultList();
 			tx.commit();
 		} catch (Exception e) {

@@ -9,15 +9,19 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import javax.faces.event.ActionEvent;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.servlet.http.HttpSession;
+
+import org.primefaces.component.selectbooleanbutton.SelectBooleanButton;
 
 import DAO.CadastroDespesasDAO;
 import DAO.CadastroReceitasDAO;
 import DAO.DataDao;
 import DAO.DespesasDAO;
 import DAO.UsuariosDAO;
+import model.CadastroDespesasModel;
 import model.DespesasModel;
 import model.GerenciaContas;
 
@@ -29,8 +33,14 @@ public class GerenciaDespesaController {
 	private DataModel<CadastroDespesasDAO> listdespesaData;
 	private DataModel<CadastroReceitasDAO> listreceitasData;
 	private DespesasDAO despesaDao;
+	private CadastroDespesasDAO cadastroDespeDAO;
+	CadastroDespesasModel cadastrodespM = new CadastroDespesasModel();
 	GerenciaContas gerenciaContas = new GerenciaContas();
 	DespesasModel depesaModel = new DespesasModel();
+	SelectBooleanButton botao;
+	
+	
+	
 		
 	public DespesasDAO getDespesaDao() {
 		return despesaDao;
@@ -52,7 +62,7 @@ public class GerenciaDespesaController {
 
 		List<CadastroDespesasDAO> lista = new ArrayList<CadastroDespesasDAO>();
 		lista = gerenciaContas.listaDespesaDoMes(usuarioId);
-
+				
 		listdespesaData = new ListDataModel<CadastroDespesasDAO>(lista);
 
 		return listdespesaData;
@@ -93,6 +103,26 @@ public class GerenciaDespesaController {
 
 		return valor1;
 	}
+	
+	
+	public String valorTotalDespesaDescontaPago() {
+
+		Double valor = null;
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		HttpSession session = (HttpSession) facesContext.getExternalContext()
+				.getSession(false);
+
+		UsuariosDAO usuario1 = (UsuariosDAO) session.getAttribute("usuario");
+		long usuarioId = usuario1.getId();
+
+		valor = gerenciaContas.valorDespesaTotalDescontaPago(usuarioId);
+		if(valor==null){
+		      valor=0.00;
+		
+	          }
+		String valor1 = NumberFormat.getCurrencyInstance().format(valor);
+        return valor1;
+	}
 
 	public String valorTotalReceitas() {
 
@@ -124,6 +154,17 @@ public class GerenciaDespesaController {
 		
 	}
 	
+
+	 public void DeixarComoPagoCadastroDespesa(){
+		 
+		 cadastroDespeDAO = (CadastroDespesasDAO) (listdespesaData.getRowData());
+		 cadastroDespeDAO.setStatus(true);
+		 cadastrodespM.AlteraCadastroDespesas(cadastroDespeDAO);
+		 
+		// return "listaGerenciaDespesa";
+		  
+	 }
+	
 	public boolean isMudacorCampoSaldoAtual() {
 		return mudacorCampoSaldoAtual;
 	}
@@ -132,4 +173,6 @@ public class GerenciaDespesaController {
 		this.mudacorCampoSaldoAtual = mudacorCampoSaldoAtual;
 	}
 
+	
+	
 }
