@@ -112,7 +112,10 @@ public class GerenciaContas {
 		}
 		// PersistenceUtil.close(em);
 		// PersistenceUtil.close();
-		
+		 if(valor1==0){
+		    valor1=0;	
+		 }
+		 
 		saldoDespesa = valor1;
 
 		return valor1;
@@ -174,7 +177,9 @@ public class GerenciaContas {
 		}
 		// PersistenceUtil.close(em);
 		// PersistenceUtil.close();
-
+                  if(valor1==0){
+		    valor1=0;	
+		 }
 		 saldoReceita = valor1;
 		return valor1;
 
