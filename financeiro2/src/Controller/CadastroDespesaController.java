@@ -72,7 +72,7 @@ public class CadastroDespesaController {
 		cadastroDespeDAO = new CadastroDespesasDAO();
 
 		cadastroDespeDAO.setUsuario(usuario1);
-		cadastroDespeDAO.setStatus(true);
+		cadastroDespeDAO.setStatus(false);
 		return "novoCadastroDespesa.xhtml";
 
 	}
@@ -113,7 +113,7 @@ public class CadastroDespesaController {
 	 
 	 public String alteraCadastroDespesa(){
 		 
-		 cadastroDespeDAO.setStatus(true);
+		 cadastroDespeDAO.setStatus(false);
 		 cadastrodespM.AlteraCadastroDespesas(cadastroDespeDAO);
 		 
 		 return "listaCadastroDespesa.xhtml";

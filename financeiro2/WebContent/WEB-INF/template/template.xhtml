@@ -14,7 +14,7 @@
 
 <div class="header">
 <p:graphicImage library="imagens" name="logo.png" width="350px" height="85px" />
-<p:commandLink action="#{usuarioController.logout()}" style="margin-left:950px; font-size:20px;" immediate="true" >
+<p:commandLink action="#{usuarioController.logout()}" style="margin-left:950px; font-size:20px;" immediate="true">
 <p:graphicImage  library="imagens" name="sair.png" width="30px" height="50px" />
 </p:commandLink>
 <p:outputLabel value=" Bem vindo! #{usuarioController.usuarioLogado()}" style="margin-left:50%;
@@ -45,7 +45,7 @@
     <ul class="box">
     	<li> <h:link id="GerenciarDespesas" rendered="true" outcome="listaGerenciaDespesa.xhtml">Gerencia Despesas</h:link></li>				
         <li><a href="#">Graficos</a></li>
-        <li><a href="#">Rel&aacute;torio</a></li>
+        <li><h:link id="Relatorio" rendered="true" outcome="relatorioGeralDataInicioFinal.xhtml">Rel&aacute;torio</h:link></li>
         <!-- mais links -->
     </ul>
 

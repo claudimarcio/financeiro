@@ -48,7 +48,6 @@ public class Autentication1 implements Filter {
 			
 		
 		if(usuario.getAutoridade()=="admin"){
-			System.out.println("liberado para o admin");
 			chain.doFilter(request, response);	
 		}else{
 		

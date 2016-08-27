@@ -68,7 +68,7 @@ public class CadastroReceitaController {
 		cadastroRecDAO = new CadastroReceitasDAO();
 
 		cadastroRecDAO.setUsuario(usuario1);
-		cadastroRecDAO.setStatus(true);
+		cadastroRecDAO.setStatus(false);
 		return "novoCadastroReceita.xhtml";
 
 	}
@@ -120,7 +120,7 @@ public class CadastroReceitaController {
 	 
  public String alteraCadastroReceita(){
 		 
-		 cadastroRecDAO.setStatus(true);
+		 cadastroRecDAO.setStatus(false);
 		 cadastrorecM.AlteraCadastroReceitas(cadastroRecDAO);;
 		 
 		 return "listaCadastroReceita.xhtml";

@@ -14,7 +14,7 @@ import javax.servlet.http.HttpSession;
 
 import model.UsuariosModel;
 import DAO.UsuariosDAO;
-import conexao.JPAListener;
+//import conexao.JPAListener;
 import controleLogin.Autentication;
 import controleLogin.Autentication1;
 
@@ -124,6 +124,8 @@ public class UsuarioController {
 
 				// define qual diretorio de acordo com privilégios
 				if (user.getAutoridade().equals("admin")) {
+					
+				
 					url = "../areaCliente/areaAdmin/lista.xhtml";
 					//session.setMaxInactiveInterval(3);// invalida a sessão apos 2 min
 					
