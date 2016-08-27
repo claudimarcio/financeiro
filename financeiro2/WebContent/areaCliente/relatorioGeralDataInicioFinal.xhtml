@@ -1,0 +1,186 @@
+<ui:composition template="../WEB-INF/template/template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:mj="http://mojarra.dev.java.net/mojarra_ext"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="conteudo">
+		<h:form id="formListaDespesas">
+		<p:tabView>
+				<p:tab title="Contas a pagar Relatorio por Data">
+		
+			<p:panel id="panel" header="Filtro por Data"
+				style="margin-bottom:10px;">
+				<h:panelGrid columns="2" cellpadding="2">
+					<p:outputLabel for="dataInicio" value="Selecione Data Inicio:" />
+					<p:calendar id="dataInicio"
+						value="#{relatorioGeralController.dataInicio}" showOn="button"
+						pattern="dd/MM/yyyy" readonlyInput="true"
+						widgetVar="calendarInicio">
+						<f:convertDateTime pattern="dd/MM/yyyy" timeZone="GMT-3" />
+					</p:calendar>
+					<p:outputLabel for="dataFinal" value="Selecione Data Final:" />
+					<p:calendar id="dataFinal"
+						value="#{relatorioGeralController.dataFinal}" showOn="button"
+						pattern="dd/MM/yyyy">
+						<f:convertDateTime pattern="dd/MM/yyyy" timeZone="GMT-3" />
+					</p:calendar>
+					<p:commandButton value="Consultar"
+						action="#{relatorioGeralController.ChamaMetodoDespesaEReceita()}"
+						icon="ui-icon-check" update=":formListaDespesas">
+					</p:commandButton>
+					<p:commandButton value="Limpar Campos" update="panel"
+						process="@this"
+						actionListener="#{relatorioGeralController.reset()}" />
+				</h:panelGrid>
+			</p:panel>
+			<br />
+			<p:dataTable paginator="true" rows="10" border="1"
+				style="text-align:center" id="tabelaGastos"
+				value="#{relatorioGeralController.listdespesaData}" var="lista">
+				<f:facet name="header">
+                         Relatório Geral
+                         </f:facet>
+
+				<p:column headerText="Despesa Nome">
+					<h:outputText value="#{lista.despesas.nome}" />
+				</p:column>
+
+				<p:column headerText="Tipo de Despesa">
+					<h:outputText value="#{lista.despesas.tipo}" />
+				</p:column>
+
+
+
+				<p:column headerText="Data da Despesa">
+					<h:outputText value="#{lista.data}">
+						<f:convertDateTime pattern="dd-MM-yyyy" />
+					</h:outputText>
+				</p:column>
+
+
+				<p:column headerText="Despesa Valor">
+					<h:outputText value="#{lista.valor}" style="color: red">
+						<f:convertNumber minFractionDigits="2" />
+					</h:outputText>
+				</p:column>
+
+				<p:columnGroup type="footer">
+					<p:row>
+						<p:column colspan="3" style="text-align:right" footerText="Total:" />
+						<p:column footerText="#{relatorioGeralController.valorTotalDespesaStr}" style=" color: red">
+						</p:column>
+
+					</p:row>
+				</p:columnGroup>
+
+
+
+			</p:dataTable>
+
+           </p:tab>
+           
+           
+           <p:tab title="Receitas">
+
+
+					<p:dataTable paginator="true" rows="10" border="1"
+						style="text-align:center"
+						value="#{relatorioGeralController.listreceitaData}"
+						var="receita">
+						<f:facet name="header">
+        Gerenciar Receitas
+ </f:facet>
+						<p:column headerText="Receita Nome">
+							<h:outputText value="#{receita.receitas.nome}" />
+						</p:column>
+
+						<p:column headerText="Tipo de Receita">
+							<h:outputText value="#{receita.receitas.tipo}" />
+						</p:column>
+
+
+
+						<p:column headerText="Data da Receita">
+
+							<h:outputText value="#{receita.data}">
+								<f:convertDateTime pattern="dd-MM-yyyy" />
+
+							</h:outputText>
+
+
+						</p:column>
+
+
+						<p:column headerText="Receita Valor">
+							<h:outputText value="#{receita.valor}"
+								style="color: blue">
+								<f:convertNumber minFractionDigits="2" />
+							</h:outputText>
+						</p:column>
+
+						<p:columnGroup type="footer">
+							<p:row>
+								<p:column colspan="3" style="text-align:right"
+									footerText="Total:" />
+								<p:column
+									footerText="#{relatorioGeralController.valorTotalReceitaStr}"
+									style=" color: blue">
+								</p:column>
+
+
+
+							</p:row>
+						</p:columnGroup>
+					</p:dataTable>
+				</p:tab>
+           
+           
+           </p:tabView>
+
+			<br />
+			<br />
+			<br />
+			
+			
+			<p:panel header="Saldo total Receita" style="width:300px">
+				<h:panelGrid columns="2">
+					<p:outputLabel value="	" />
+					<h:outputText
+						value="#{relatorioGeralController.valorTotalReceitaStr}"
+						style="color:blue" />
+				</h:panelGrid>
+			</p:panel>
+
+			<p:panel header="Saldo total Despesa" style="width:300px">
+				<h:panelGrid columns="2">
+					<p:outputLabel value="" />
+					<h:outputText
+						value="#{relatorioGeralController.valorTotalDespesaStr}"
+						style="color:red" />
+				</h:panelGrid>
+			</p:panel>
+
+			<p:panel header="SALDO ATUAL" style="width:300px">
+				<h:panelGrid columns="2">
+					<p:outputLabel value="	" />
+					<h:outputText value="#{relatorioGeralController.diferencaDespesaReceitastr}" />
+				</h:panelGrid>
+			</p:panel>
+
+	
+		</h:form>
+
+
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+
+	</ui:define>
+
+</ui:composition>
