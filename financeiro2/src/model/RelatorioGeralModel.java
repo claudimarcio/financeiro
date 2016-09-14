@@ -2,8 +2,10 @@ package model;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.ListResourceBundle;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
@@ -195,7 +197,113 @@ String data11=formato1.format(datafinal);
 		return valorTotalReceita;
 
 	}
+	
+	
+	public List<Integer>listaMesAnoReceita(Long usuarioId){
+		
+		EntityManager em = PersistenceUtil.getEntityManager();
+		EntityTransaction tx = em.getTransaction();
+	 List<Integer> lista = null;
+		
+		
+		
+		try {
+			tx.begin();
+			// Query query =
+			// em.createQuery(" from CadastroDespesasDAO cd join fetch cd.despesas  join fetch cd.usuario",
+			// CadastroDespesasDAO.class);
+
+			
+			
+			 Query query= em.createQuery(
+					"select EXTRACT(YEAR_MONTH FROM cd.data)  from CadastroReceitasDAO cd "
+							+"WHERE cd.usuario= '"+usuarioId+"'"
+							+"group by EXTRACT(YEAR_MONTH FROM cd.data)", Integer.class);
+					 
+			  lista = query.getResultList(); 
+			 
+			tx.commit();
+		} catch (Exception e) {
+			System.out.println("erro ao gerar a lista: " + e);
+		}
+		// PersistenceUtil.close(em);
+		// PersistenceUtil.close();
+		
+			
+		return lista;
+	}
 
 	
+	
+public List<Double>listaValorMesAnoReceita(Long usarioId){
+		
+		EntityManager em = PersistenceUtil.getEntityManager();
+		EntityTransaction tx = em.getTransaction();
+	 List<Double> lista = null;
+		
+		
+		
+		try {
+			tx.begin();
+			// Query query =
+			// em.createQuery(" from CadastroDespesasDAO cd join fetch cd.despesas  join fetch cd.usuario",
+			// CadastroDespesasDAO.class);
+
+			
+			
+			 Query query= em.createQuery(
+					"select  sum(cd.valor) from CadastroReceitasDAO cd "
+					 +"WHERE cd.usuario= '"+usarioId+"'"
+					 +"group by EXTRACT(YEAR_MONTH FROM cd.data)", Double.class);
+					 
+			  lista = query.getResultList(); 
+			 
+			tx.commit();
+		} catch (Exception e) {
+			System.out.println("erro ao gerar a lista: " + e);
+		}
+		// PersistenceUtil.close(em);
+		// PersistenceUtil.close();
+		
+			
+		return lista;
+	}
+
+	
+
+public List<Integer>listaValorMesAnoReceitaData(Long usarioId){
+	
+	EntityManager em = PersistenceUtil.getEntityManager();
+	EntityTransaction tx = em.getTransaction();
+ List<Integer> lista = null;
+	
+	
+	
+	try {
+		tx.begin();
+		// Query query =
+		// em.createQuery(" from CadastroDespesasDAO cd join fetch cd.despesas  join fetch cd.usuario",
+		// CadastroDespesasDAO.class);
+
+		
+		
+		 Query query= em.createQuery(
+				"select  EXTRACT(YEAR_MONTH FROM cd.data) from CadastroReceitasDAO cd "
+				 +"WHERE cd.usuario= '"+usarioId+"'"
+				 +"group by EXTRACT(YEAR_MONTH FROM cd.data)", Integer.class);
+				 
+		  lista = query.getResultList(); 
+		 
+		tx.commit();
+	} catch (Exception e) {
+		System.out.println("erro ao gerar a lista: " + e);
+	}
+	// PersistenceUtil.close(em);
+	// PersistenceUtil.close();
+	
+		
+	return lista;
+}
+
 
 }

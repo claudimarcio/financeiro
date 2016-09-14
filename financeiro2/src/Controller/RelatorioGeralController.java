@@ -28,6 +28,7 @@ public class RelatorioGeralController {
 	private Date dataInicio, dataFinal;
 	private boolean mudacorCampoSaldoAtual;
 	private DataDao dataDao;
+	private DataModel<Double> ValorTotalReceitaAnoMes;
 	private DataModel<CadastroDespesasDAO> listdespesaData;
 	private DataModel<CadastroReceitasDAO> listreceitaData;
 	private DataModel<CadastroReceitasDAO> listreceitasData;
@@ -114,7 +115,7 @@ public class RelatorioGeralController {
 
 	public void listaDespesaDataInicioFinal() throws ParseException {
 
-		System.out.println("até aqui chegou");
+		
 		
 		
 
@@ -205,6 +206,9 @@ public void valorTotalReceitas() throws ParseException {
 	  setDiferencaDespesaReceitastr(NumberFormat.getCurrencyInstance().format(valorDiferenca));
 	  
   }
+  
+  
+    
 	
 	
 	

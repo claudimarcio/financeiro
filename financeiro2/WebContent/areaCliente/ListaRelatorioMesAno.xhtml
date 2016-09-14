@@ -1,0 +1,37 @@
+<ui:composition template="../WEB-INF/template/template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:mj="http://mojarra.dev.java.net/mojarra_ext"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="conteudo">
+	<h:form id="formListaDespesas">
+
+			
+			<p:dataTable paginator="true" rows="10" border="1"
+				value="#{anoController.listaMesAno()}" var="lista">
+				 
+				<f:facet name="header">
+                  Lista dos Gastos Cadastrados
+                </f:facet>
+				
+				<p:column headerText="Valor total Receita">
+					<h:outputText value="#{lista.intValue()}" />
+				</p:column>
+				
+				<p:column headerText="Mes Ano" >
+					<h:outputText value="#{anoController.ano.iterator()}" />
+				</p:column>
+				
+				
+			</p:dataTable>
+			
+			
+		
+			
+		</h:form>
+
+	</ui:define>
+	</ui:composition>

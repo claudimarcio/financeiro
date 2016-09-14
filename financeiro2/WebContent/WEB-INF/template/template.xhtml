@@ -12,6 +12,10 @@
 </h:head> 
 <h:body> 
 
+<div class="ui-g">
+
+<div class="ui-g">
+ <div class="ui-g-12 ui-md-6 ui-lg-12">
 <div class="header">
 <p:graphicImage library="imagens" name="logo.png" width="350px" height="85px" />
 <p:commandLink action="#{usuarioController.logout()}" style="margin-left:950px; font-size:20px;" immediate="true">
@@ -20,17 +24,19 @@
 <p:outputLabel value=" Bem vindo! #{usuarioController.usuarioLogado()}" style="margin-left:50%;
    font-size:15px; color:orange; "/>  
 
-</div>
+</div><!-- fim da div header -->
+</div><!-- fim da primeira div responsive  ui-g -->
 
-<div id="centro">
 
-<ui:insert name="conteudo" >
-    
-</ui:insert> 
-</div>
+</div> <!-- fim da div responsive para o header -->
+
+<div class="ui-g">
+
+
+
+<div class="ui-g-12 ui-md-6 ui-lg-4">
 
 <div id="lateral">
-
 <div id="menu">
 
 <h3 class="link-titulo">Cadastros</h3>  			
@@ -46,7 +52,8 @@
     	<li> <h:link id="GerenciarDespesas" rendered="true" outcome="listaGerenciaDespesa.xhtml">Gerencia Despesas</h:link></li>				
         <li><a href="#">Graficos</a></li>
         <li><h:link id="Relatorio" rendered="true" outcome="relatorioGeralDataInicioFinal.xhtml">Rel&aacute;torio</h:link></li>
-        <!-- mais links -->
+        <li><h:link id="RelatorioMesAno" rendered="true" outcome="ListaRelatorioMesAno">Rel&aacute;torio Mes Ano</h:link></li>
+         <!-- mais links -->
     </ul>
 
 
@@ -58,8 +65,21 @@
 </div> <!-- /#menu -->
 
 </div> <!-- /#lateral -->
+</div> <!-- fim da div responsive lateral "ui-g-12 ui-md-6 ui-lg-4" -->
 
 
+<div class="ui-g-12 ui-md-6 ui-lg-8">
 
+<div id="centro">
+
+<ui:insert name="conteudo" >
+    
+</ui:insert> 
+</div>
+</div> <!-- fim da div resposive do centro  "ui-g-12 ui-md-6 ui-lg-8"  -->
+
+</div>
+
+</div> <!-- fim da div resposive do centro  "ui-g topo apos body"  -->
 </h:body> 
 </html>
