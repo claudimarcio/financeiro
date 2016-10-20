@@ -10,9 +10,11 @@ import java.util.ListResourceBundle;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
 import DAO.CadastroDespesasDAO;
 import DAO.CadastroReceitasDAO;
+import DAO.recebeMesAno;
 import conexao.PersistenceUtil;
 
 public class RelatorioGeralModel {
@@ -198,12 +200,13 @@ String data11=formato1.format(datafinal);
 
 	}
 	
-	
+	/*
+	@SuppressWarnings("unchecked")
 	public List<Integer>listaMesAnoReceita(Long usuarioId){
 		
 		EntityManager em = PersistenceUtil.getEntityManager();
 		EntityTransaction tx = em.getTransaction();
-	 List<Integer> lista = null;
+	 List lista = null;
 		
 		
 		
@@ -216,7 +219,7 @@ String data11=formato1.format(datafinal);
 			
 			
 			 Query query= em.createQuery(
-					"select EXTRACT(YEAR_MONTH FROM cd.data)  from CadastroReceitasDAO cd "
+					"select EXTRACT(YEAR_MONTH FROM cd.data) from CadastroReceitasDAO cd "
 							+"WHERE cd.usuario= '"+usuarioId+"'"
 							+"group by EXTRACT(YEAR_MONTH FROM cd.data)", Integer.class);
 					 
@@ -229,11 +232,11 @@ String data11=formato1.format(datafinal);
 		// PersistenceUtil.close(em);
 		// PersistenceUtil.close();
 		
-			
+		
 		return lista;
 	}
 
-	
+	*/
 	
 public List<Double>listaValorMesAnoReceita(Long usarioId){
 		
@@ -271,7 +274,7 @@ public List<Double>listaValorMesAnoReceita(Long usarioId){
 
 	
 
-public List<Integer>listaValorMesAnoReceitaData(Long usarioId){
+public List<Integer>listaMesAnoReceitaData(Long usarioId){
 	
 	EntityManager em = PersistenceUtil.getEntityManager();
 	EntityTransaction tx = em.getTransaction();
@@ -288,7 +291,7 @@ public List<Integer>listaValorMesAnoReceitaData(Long usarioId){
 		
 		
 		 Query query= em.createQuery(
-				"select  EXTRACT(YEAR_MONTH FROM cd.data) from CadastroReceitasDAO cd "
+				"select  EXTRACT(YEAR_MONTH FROM cd.data) from CadastroReceitasDAO cd  "
 				 +"WHERE cd.usuario= '"+usarioId+"'"
 				 +"group by EXTRACT(YEAR_MONTH FROM cd.data)", Integer.class);
 				 
@@ -304,6 +307,54 @@ public List<Integer>listaValorMesAnoReceitaData(Long usarioId){
 		
 	return lista;
 }
+
+
+@SuppressWarnings("unchecked")
+public List <recebeMesAno>listaAgregada(Long usarioId){
+	
+	EntityManager em = PersistenceUtil.getEntityManager();
+	EntityTransaction tx = em.getTransaction();
+	List <Object[]> resultado= null;
+	List<recebeMesAno>result = null;
+	List<recebeMesAno>lista = new ArrayList<recebeMesAno>();
+	
+	
+	
+	
+	try {
+		tx.begin();
+		// Query query =
+		// em.createQuery(" from CadastroDespesasDAO cd join fetch cd.despesas  join fetch cd.usuario",
+		// CadastroDespesasDAO.class);
+
+		
+		
+		final Query query= em.createQuery(
+				"select  sum(cd.valor), EXTRACT(YEAR_MONTH FROM cd.data) from CadastroReceitasDAO cd  "
+				 +"WHERE cd.usuario= '"+usarioId+"'"
+				 +"group by EXTRACT(YEAR_MONTH FROM cd.data)");
+	 resultado=(List<Object[]>)query.getResultList(); 
+	for(Object[] linha : resultado){
+ 		   	 lista.add(new recebeMesAno(((Integer)linha[1]), ((Double)linha[0])));
+	    	
+	   	
+	 }
+	  System.out.println(lista);
+	  
+	  
+	 tx.commit();
+	   	
+		    	
+	} catch (Exception e) {
+		System.out.println("erro ao gerar a lista: " + e);
+	}
+	// PersistenceUtil.close(em);
+	// PersistenceUtil.close();
+		
+	return lista;
+}
+
+
 
 
 }

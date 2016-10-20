@@ -1,5 +1,6 @@
 package Controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
@@ -10,12 +11,15 @@ import javax.servlet.http.HttpSession;
 import model.CadastroDespesasModel;
 import model.RelatorioGeralModel;
 import DAO.UsuariosDAO;
+import DAO.recebeMesAno;
 
 @ManagedBean(name = "anoController")
 @SessionScoped
 public class RelatorioMesAnoController {
 	private List<Integer> ano;
 	private List <Double> ValorTotalReceitaAnoMes ;
+	
+	
 	 public List<Double> getValorTotalReceitaAnoMes() {
 		return ValorTotalReceitaAnoMes;
 	}
@@ -55,7 +59,7 @@ public class RelatorioMesAnoController {
 	
 	
 
-	public  List<Double> listaMesAno(){
+	public void listaValor(){
 		  
 		  
 		  FacesContext facesContext = FacesContext.getCurrentInstance();
@@ -65,10 +69,8 @@ public class RelatorioMesAnoController {
 			UsuariosDAO usuario1 = (UsuariosDAO) session.getAttribute("usuario");
 			long usuarioId = usuario1.getId();
 			ValorTotalReceitaAnoMes =  relatorioGeral.listaValorMesAnoReceita(usuarioId );
-		   System.out.println(ValorTotalReceitaAnoMes);
-		   listaMesAnoData();
 		
-		  return ValorTotalReceitaAnoMes;
+		 
 		  
 	  }
 	
@@ -82,10 +84,33 @@ public class RelatorioMesAnoController {
 
 			UsuariosDAO usuario1 = (UsuariosDAO) session.getAttribute("usuario");
 			long usuarioId = usuario1.getId();
-			ano =  relatorioGeral.listaValorMesAnoReceitaData(usuarioId );
+			ano =  relatorioGeral.listaMesAnoReceitaData(usuarioId);
+			
+			
+		
+				
+	}
+	
+	public  List<recebeMesAno> listaMesAno(){
+		
+		  FacesContext facesContext = FacesContext.getCurrentInstance();
+			HttpSession session = (HttpSession) facesContext.getExternalContext()
+					.getSession(false);
+			
+			UsuariosDAO usuario1 = (UsuariosDAO) session.getAttribute("usuario");
+			long usuarioId = usuario1.getId();
+			List<recebeMesAno>listarecebeMesAno;
+			
+			listarecebeMesAno = relatorioGeral.listaAgregada(usuarioId);
+			
+			
+			return listarecebeMesAno;
+		
+		
+	}
 		   
 		
-		 
+  
 		  
 	  }
 
@@ -93,4 +118,4 @@ public class RelatorioMesAnoController {
 	
 
 
-}
+

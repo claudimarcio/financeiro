@@ -35,12 +35,7 @@
 						pattern="dd/MM/yyyy"
 						showOn="button" />
 
-					<p:outputLabel for="tipo" value="Tipo: " />
-					<p:selectOneMenu id="tipo"
-						value="#{cadastroReceitaController.cadastroRecDAO.receitas.tipo}">
-                        <f:selectItem itemValue="fixa" itemLabel="fixa" />
-						<f:selectItem itemValue="variavel" itemLabel="variavel" />
-					</p:selectOneMenu>
+					
 					
 					<p:commandButton value="Alterar" icon="ui-icon-disk "
 						action="#{cadastroReceitaController.alteraCadastroReceita()}" update="messages"

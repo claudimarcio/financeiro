@@ -62,7 +62,7 @@ public class CadastroDespesasModel {
 			System.out.println("Erro ao alterar cadastro de despesas" + e);
 			tx.rollback();
 		}
-		//PersistenceUtil.close(em);
+		PersistenceUtil.close(em);
 		//PersistenceUtil.close();
 	}
 
